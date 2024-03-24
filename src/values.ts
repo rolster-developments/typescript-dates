@@ -2,6 +2,7 @@ import {
   after,
   before,
   between,
+  equals,
   normalizeMinTime,
   timeDifference
 } from './lib';
@@ -30,6 +31,10 @@ export class DateRange {
 
   public between(date: Date): boolean {
     return between(this.minDate, this.maxDate, date);
+  }
+
+  public equals({ maxDate, minDate }: DateRange) {
+    return equals(this.minDate, minDate) && equals(this.maxDate, maxDate);
   }
 
   public recalculate(date: Date): DateRange {
