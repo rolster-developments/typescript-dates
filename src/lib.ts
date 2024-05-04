@@ -264,12 +264,13 @@ export function isLeapYear(year: number): boolean {
   return year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
 }
 
-const regInterpolation = /([^( |,|.|\-|_|@|#|$|%|&)][a-zA-Z]*)/g;
+const regInterpolation = /([^( |,|.|:|;|\+|\-|\/|_|@|#|$|%|&)][a-zA-Z]*)/g;
 
 export function formatDate(date: Date, template: string): string {
-  return template.replace(regInterpolation, (key) =>
-    FORMATTERS[key] ? FORMATTERS[key](date) : key
-  );
+  return template.replace(regInterpolation, (key) =>{
+    console.log(key)
+    return FORMATTERS[key] ? FORMATTERS[key](date) : key
+  });
 }
 
 interface CreateDate {

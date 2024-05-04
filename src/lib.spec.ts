@@ -1,11 +1,23 @@
 import { formatDate } from './lib';
 
-describe('FormatDate', () => {
-  it('should generate format with template successful', () => {
-    const date = new Date(2024, 4, 30);
+const date = new Date(2024, 4, 30, 10, 4, 24);
 
-    expect(formatDate(date, 'dd, mn del aa')).toBe('30, Mayo del 2024');
-    expect(formatDate(date, 'dd - mx del aa')).toBe('30 - May del 2024');
-    expect(formatDate(date, 'dd-mm-aa')).toBe('30-05-2024');
+describe('formatDate', () => {
+  it('should format for date template successful', () => {
+    expect(formatDate(date, 'dd, mx del aa')).toBe('30, May del 2024');
+    expect(formatDate(date, 'aa-mm-dd')).toBe('2024-05-30');
+    expect(formatDate(date, 'dd/mm/aa')).toBe('30/05/2024');
+  });
+
+  it('should format for time template successful', () => {
+    expect(formatDate(date, 'hh:ii:ss')).toBe('10:04:24');
+    expect(formatDate(date, 'hz:ii zz')).toBe('10:04 AM');
+  });
+
+  it('should format for datetime template successful', () => {
+    expect(formatDate(date, 'aa-mm-dd hh:ii:ss')).toBe('2024-05-30 10:04:24');
+    expect(formatDate(date, 'mx. dd, aa hz:ii zz')).toBe(
+      'May. 30, 2024 10:04 AM'
+    );
   });
 });
