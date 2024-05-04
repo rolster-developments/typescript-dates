@@ -264,11 +264,11 @@ export function isLeapYear(year: number): boolean {
   return year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
 }
 
-const regInterpolation = /{([^{}]*)}/g;
+const regInterpolation = /([^( |,|.|\-|_|@|#|$|%|&)][a-zA-Z]*)/g;
 
 export function formatDate(date: Date, template: string): string {
-  return template.replace(regInterpolation, (value, key) =>
-    FORMATTERS[key] ? FORMATTERS[key](date) : value
+  return template.replace(regInterpolation, (key) =>
+    FORMATTERS[key] ? FORMATTERS[key](date) : key
   );
 }
 
