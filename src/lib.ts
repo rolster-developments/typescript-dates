@@ -33,7 +33,7 @@ function verifyDayInMonth(date: Date, month: number): void {
   date.setMonth(month); // Establecer el mes
 }
 
-const FORMATTERS: DateFormat = {
+const formatters: DateFormat = {
   dd: (date: Date): string => {
     return completFormat(date.getDate(), 2);
   },
@@ -69,12 +69,6 @@ const FORMATTERS: DateFormat = {
   },
   zz: (date: Date): string => {
     return date.getHours() > 11 ? 'PM' : 'AM';
-  },
-  ddThh: (date: Date): string => {
-    const hour = completFormat(date.getHours(), 2);
-    const day = completFormat(date.getDate(), 2);
-
-    return `${day}T${hour}`;
   }
 };
 
@@ -284,11 +278,11 @@ export function isLeapYear(value: Date | number): boolean {
   return year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
 }
 
-const regInterpolation = /([^( |,|.|:|;|\+|\-|\/|_|@|#|$|%|&)][a-zA-Z]*)/g;
+const regInterpolation = /{([^{}]*)}/g;
 
 export function dateFormatTemplate(date: Date, template: string): string {
-  return template.replace(regInterpolation, (key) =>
-    FORMATTERS[key] ? FORMATTERS[key](date) : key
+  return template.replace(regInterpolation, (value, key) =>
+    formatters[key] ? formatters[key](date) : value
   );
 }
 
