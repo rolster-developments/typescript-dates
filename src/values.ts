@@ -1,10 +1,10 @@
 import {
-  after,
-  before,
-  between,
-  equals,
+  dateIsAfter,
+  dateIsBefore,
+  dateIsBetween,
+  dateIsEquals,
   normalizeMinTime,
-  timeDifference
+  getTimeDifference
 } from './lib';
 
 export class DateRange {
@@ -16,7 +16,7 @@ export class DateRange {
     this.minDate = normalizeMinTime(minDate);
 
     this.maxDate =
-      maxDate && before(maxDate, minDate)
+      maxDate && dateIsBefore(maxDate, minDate)
         ? normalizeMinTime(maxDate)
         : normalizeMinTime(minDate);
   }
@@ -30,24 +30,24 @@ export class DateRange {
   }
 
   public between(date: Date): boolean {
-    return between(this.minDate, this.maxDate, date);
+    return dateIsBetween(this.minDate, this.maxDate, date);
   }
 
   public equals({ maxDate, minDate }: DateRange) {
-    return equals(this.minDate, minDate) && equals(this.maxDate, maxDate);
+    return dateIsEquals(this.minDate, minDate) && dateIsEquals(this.maxDate, maxDate);
   }
 
   public recalculate(date: Date): DateRange {
-    if (before(this.minDate, date)) {
+    if (dateIsBefore(this.minDate, date)) {
       return new DateRange(date, this.maxDate);
     }
 
-    if (after(this.maxDate, date)) {
+    if (dateIsAfter(this.maxDate, date)) {
       return new DateRange(this.minDate, date);
     }
 
-    const minDifference = timeDifference(date, this.minDate);
-    const maxDifference = timeDifference(this.maxDate, date);
+    const minDifference = getTimeDifference(date, this.minDate);
+    const maxDifference = getTimeDifference(this.maxDate, date);
 
     return minDifference > maxDifference
       ? new DateRange(this.minDate, date)
