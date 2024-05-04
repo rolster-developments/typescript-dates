@@ -69,6 +69,12 @@ const FORMATTERS: DateFormat = {
   },
   zz: (date: Date): string => {
     return date.getHours() > 11 ? 'PM' : 'AM';
+  },
+  ddThh: (date: Date): string => {
+    const day = formatComplet(date.getDate(), 2);
+    const hour = formatComplet(date.getHours(), 2);
+
+    return `${day}T${hour}`;
   }
 };
 
@@ -267,10 +273,9 @@ export function isLeapYear(year: number): boolean {
 const regInterpolation = /([^( |,|.|:|;|\+|\-|\/|_|@|#|$|%|&)][a-zA-Z]*)/g;
 
 export function formatDate(date: Date, template: string): string {
-  return template.replace(regInterpolation, (key) =>{
-    console.log(key)
-    return FORMATTERS[key] ? FORMATTERS[key](date) : key
-  });
+  return template.replace(regInterpolation, (key) =>
+    FORMATTERS[key] ? FORMATTERS[key](date) : key
+  );
 }
 
 interface CreateDate {

@@ -19,5 +19,6 @@ describe('formatDate', () => {
     expect(formatDate(date, 'mx. dd, aa hz:ii zz')).toBe(
       'May. 30, 2024 10:04 AM'
     );
+    expect(formatDate(date, 'aa-mm-ddThh:ii:ss')).toBe('2024-05-30T10:04:24');
   });
 });
