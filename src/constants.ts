@@ -38,6 +38,10 @@ function loadI18n(language = 'es'): void {
   DAY_LABELS_I18N = DAY_NAMES_I18N.map((name) => name.substring(0, 3));
 }
 
+function isNumber(value?: number): value is number {
+  return value !== undefined && value !== null;
+}
+
 loadI18n();
 
 i18nSubscribe((language) => loadI18n(language));
@@ -60,23 +64,23 @@ export const MONTH_DAYS = [
 export function MONTH_NAMES(index: number): string;
 export function MONTH_NAMES(): string[];
 export function MONTH_NAMES(index?: number): string[] | string {
-  return index ? MONTH_NAMES_I18N[index] || '' : MONTH_NAMES_I18N;
+  return isNumber(index) ? MONTH_NAMES_I18N[index] || '' : MONTH_NAMES_I18N;
 }
 
 export function MONTH_LABELS(index: number): string;
 export function MONTH_LABELS(): string[];
 export function MONTH_LABELS(index?: number): string[] | string {
-  return index ? MONTH_LABELS_I18N[index] || '' : MONTH_LABELS_I18N;
+  return isNumber(index) ? MONTH_LABELS_I18N[index] || '' : MONTH_LABELS_I18N;
 }
 
 export function DAY_NAMES(index: number): string;
 export function DAY_NAMES(): string[];
 export function DAY_NAMES(index?: number): string[] | string {
-  return index ? DAY_NAMES_I18N[index] || '' : DAY_NAMES_I18N;
+  return isNumber(index) ? DAY_NAMES_I18N[index] || '' : DAY_NAMES_I18N;
 }
 
 export function DAY_LABELS(index: number): string;
 export function DAY_LABELS(): string[];
 export function DAY_LABELS(index?: number): string[] | string {
-  return index ? DAY_LABELS_I18N[index] || '' : DAY_LABELS_I18N;
+  return isNumber(index) ? DAY_LABELS_I18N[index] || '' : DAY_LABELS_I18N;
 }
