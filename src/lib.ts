@@ -3,7 +3,7 @@ import { Miliseconds } from './types';
 
 type DateFormat = Record<string, (date: Date) => string>;
 
-interface DateJson {
+export interface DateJson {
   day: number;
   month: number;
   year: number;
