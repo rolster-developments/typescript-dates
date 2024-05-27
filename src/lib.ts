@@ -3,6 +3,12 @@ import { Miliseconds } from './types';
 
 type DateFormat = Record<string, (date: Date) => string>;
 
+interface DateJson {
+  day: number;
+  month: number;
+  year: number;
+}
+
 function completFormat(value: number, size: number): string {
   return value.toString().padStart(size, '0');
 }
@@ -119,6 +125,14 @@ const ELAPSED_TIMES: ElapsedTime[] = [
 
 export function cloneDate(date: Date): Date {
   return new Date(date.getTime());
+}
+
+export function dateToJson(date: Date): DateJson {
+  return {
+    day: date.getDate(),
+    month: date.getMonth(),
+    year: date.getFullYear()
+  };
 }
 
 export function dateFormatForHumans(milliseconds: number): string {
