@@ -117,6 +117,10 @@ const ELAPSED_TIMES: ElapsedTime[] = [
   createElapsedTime(Miliseconds.Second, 'segundo')
 ];
 
+export function cloneDate(date: Date): Date {
+  return new Date(date.getTime());
+}
+
 export function dateFormatForHumans(milliseconds: number): string {
   const prefix = milliseconds > 0 ? 'Falta' : 'Hace';
   const value = Math.abs(milliseconds);
