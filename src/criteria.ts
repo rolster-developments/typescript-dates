@@ -1,0 +1,32 @@
+import { Criteria } from '@rolster/helpers-advanced';
+import { DateRange } from './values';
+
+type CriteriaKey = string | number | symbol;
+
+class CriteriaDateRange extends Criteria<DateRange> {
+  constructor(
+    public readonly minKey: string,
+    public readonly maxKey: string,
+    value: DateRange
+  ) {
+    super(minKey, value);
+  }
+
+  public equals(value: DateRange): boolean {
+    return this.value.equals(value);
+  }
+}
+
+export class CriteriaDateRangeTime extends CriteriaDateRange {
+  public assign(callback: (key: CriteriaKey, value: any) => void): void {
+    callback(this.minKey, this.value.minDate.getTime());
+    callback(this.maxKey, this.value.maxDate.getTime());
+  }
+}
+
+export class CriteriaDateRangeISO extends CriteriaDateRange {
+  public assign(callback: (key: CriteriaKey, value: any) => void): void {
+    callback(this.minKey, this.value.minISOFormat);
+    callback(this.maxKey, this.value.maxISOFormat);
+  }
+}
