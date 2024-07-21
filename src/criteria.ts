@@ -1,4 +1,4 @@
-import { Criteria } from '@rolster/helpers-advanced';
+import { Criteria } from '@rolster/commons';
 import { DateRange } from './values';
 
 type CriteriaKey = string | number | symbol;
