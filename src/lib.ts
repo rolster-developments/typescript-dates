@@ -296,10 +296,10 @@ export function isLeapYear(value: Date | number): boolean {
   return year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
 }
 
-const regInterpolation = /{([^{}]*)}/g;
+const REGEX_INTERPOLATION = /{([^{}]*)}/g;
 
 export function dateFormatTemplate(date: Date, template: string): string {
-  return template.replace(regInterpolation, (value, key) =>
+  return template.replace(REGEX_INTERPOLATION, (value, key) =>
     formatters[key] ? formatters[key](date) : value
   );
 }
@@ -313,17 +313,9 @@ interface CreateDate {
 export function createDate({ day, month, year }: CreateDate): Date {
   const newDate = new Date();
 
-  if (year) {
-    verifyDayInYear(newDate, year);
-  }
-
-  if (month) {
-    verifyDayInMonth(newDate, month);
-  }
-
-  if (day) {
-    newDate.setDate(day);
-  }
+  year && verifyDayInYear(newDate, year);
+  month && verifyDayInMonth(newDate, month);
+  day && newDate.setDate(day);
 
   return newDate;
 }

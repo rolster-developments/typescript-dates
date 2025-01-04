@@ -1,6 +1,6 @@
 import { i18n } from '@rolster/i18n';
 
-const dateI18n = i18n({
+export const dateI18n = i18n({
   es: {
     // Months
     january: 'Enero',
@@ -64,5 +64,3 @@ const dateI18n = i18n({
     second: 'second'
   }
 });
-
-export default dateI18n;
