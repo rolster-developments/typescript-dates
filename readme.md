@@ -1,11 +1,11 @@
-# Rolster Helpers Date
+# Rolster Date Utilities
 
 Utility package for manipulating Date compatible with Typescript projects.
 
 ## Installation
 
 ```
-npm i @rolster/helpers-date
+npm i @rolster/dates
 ```
 
 ## Configuration
