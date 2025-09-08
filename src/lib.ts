@@ -26,7 +26,7 @@ function verifyDayInYear(date: Date, year: number): void {
     date.setDate(days);
   }
 
-  date.setFullYear(year); // Establecer el año
+  date.setFullYear(year); // Define year
 }
 
 function verifyDayInMonth(date: Date, month: number): void {
@@ -36,7 +36,7 @@ function verifyDayInMonth(date: Date, month: number): void {
     date.setDate(days);
   }
 
-  date.setMonth(month); // Establecer el mes
+  date.setMonth(month); // Define month
 }
 
 const formatters: DateFormat = {
@@ -58,8 +58,11 @@ const formatters: DateFormat = {
   mx: (date: Date): string => {
     return MONTH_LABELS(date.getMonth());
   },
-  aa: (date: Date): string => {
+  yy: (date: Date): string => {
     return completFormat(date.getFullYear(), 4);
+  },
+  yx: (date: Date): string => {
+    return String(date.getFullYear()).slice(-2);
   },
   hh: (date: Date): string => {
     return completFormat(date.getHours(), 2);
