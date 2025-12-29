@@ -1,9 +1,7 @@
-import { Criteria } from '@rolster/commons';
-import { DateRange } from './values';
+import { Criteria, CriteriaCallback } from '@rolster/commons';
+import { DateRange } from '../values/date-range';
 
-type Key = string | number | symbol;
-
-class DateRangeCriteria extends Criteria<DateRange> {
+export class DateRangeCriteria extends Criteria<DateRange> {
   constructor(
     public readonly minKey: string,
     public readonly maxKey: string,
@@ -17,15 +15,15 @@ class DateRangeCriteria extends Criteria<DateRange> {
   }
 }
 
-export class CriteriaDateRangeTime extends DateRangeCriteria {
-  public assign(callback: (key: Key, value: any) => void): void {
+export class DateRangeTimeCriteria extends DateRangeCriteria {
+  public assign(callback: CriteriaCallback): void {
     callback(this.minKey, this.value.minDate.getTime());
     callback(this.maxKey, this.value.maxDate.getTime());
   }
 }
 
-export class CriteriaDateRangeISO extends DateRangeCriteria {
-  public assign(callback: (key: Key, value: any) => void): void {
+export class DateRangeISOCriteria extends DateRangeCriteria {
+  public assign(callback: CriteriaCallback): void {
     callback(this.minKey, this.value.minISOFormat);
     callback(this.maxKey, this.value.maxISOFormat);
   }

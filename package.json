@@ -1,6 +1,6 @@
 {
   "name": "@rolster/dates",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "Utility package for manipulating Date compatible with Typescript projects.",
   "module": "dist/esm/index.js",
   "main": "dist/cjs/index.js",
@@ -26,8 +26,8 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@rolster/commons": "^3.0.0",
-    "@rolster/i18n": "^2.2.0"
+    "@rolster/commons": "^3.1.9",
+    "@rolster/i18n": "^2.2.1"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.4",
@@ -39,7 +39,8 @@
     "rimraf": "^3.0.2",
     "rollup": "^2.32.0",
     "tslib": "^2.4.0",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "vitest": "^3.2.4"
   },
   "repository": {
     "type": "git",

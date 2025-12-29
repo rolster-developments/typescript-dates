@@ -5,7 +5,7 @@ import {
   dateIsEquals,
   normalizeMinTime,
   getTimeDifference
-} from './lib';
+} from '../lib';
 
 export class DateRange {
   public readonly minDate: Date;
@@ -34,7 +34,9 @@ export class DateRange {
   }
 
   public equals({ maxDate, minDate }: DateRange) {
-    return dateIsEquals(this.minDate, minDate) && dateIsEquals(this.maxDate, maxDate);
+    return (
+      dateIsEquals(this.minDate, minDate) && dateIsEquals(this.maxDate, maxDate)
+    );
   }
 
   public recalculate(date: Date): DateRange {
