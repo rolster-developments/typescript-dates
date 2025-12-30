@@ -33,10 +33,19 @@ export class Time {
   }
 
   public get meridiemFormat(): string {
-    const _hour = this.hour > 12 ? this.hour - 12 : this.hour;
-    const zone = this.hour > 12 ? 'P.M.' : 'A.M.';
+    const zoneIsPM = this.hour >= 12;
 
-    const hour = String(_hour).padStart(2, '0');
+    const zone = zoneIsPM ? 'P.M.' : 'A.M.';
+
+    const hourValue = zoneIsPM
+      ? this.hour === 12
+        ? 12
+        : this.hour - 12
+      : this.hour === 0
+      ? 12
+      : this.hour;
+
+    const hour = String(hourValue).padStart(2, '0');
     const minute = String(this.minute).padStart(2, '0');
     const second = String(this.second).padStart(2, '0');
 
@@ -44,10 +53,19 @@ export class Time {
   }
 
   public get normalizeMeridiemFormat(): string {
-    const _hour = this.hour > 12 ? this.hour - 12 : this.hour;
-    const zone = this.hour > 12 ? 'P.M.' : 'A.M.';
+    const zoneIsPM = this.hour >= 12;
 
-    const hour = String(_hour).padStart(2, '0');
+    const zone = zoneIsPM ? 'P.M.' : 'A.M.';
+
+    const hourValue = zoneIsPM
+      ? this.hour === 12
+        ? 12
+        : this.hour - 12
+      : this.hour === 0
+      ? 12
+      : this.hour;
+
+    const hour = String(hourValue).padStart(2, '0');
     const minute = String(this.minute).padStart(2, '0');
 
     return `${hour}:${minute} ${zone}`;
