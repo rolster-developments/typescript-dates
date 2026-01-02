@@ -3,11 +3,12 @@ import { DateRange } from '../values/date-range';
 
 export class DateRangeCriteria extends Criteria<DateRange> {
   constructor(
+    key: string,
     public readonly minKey: string,
     public readonly maxKey: string,
     value: DateRange
   ) {
-    super(minKey, value);
+    super(key, value);
   }
 
   public equals(value: DateRange): boolean {
