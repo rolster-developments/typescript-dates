@@ -98,12 +98,24 @@ interface PendingTime {
   seconds: number;
 }
 
-const createElapsedTime = (
+export interface ElapsedDate {
+  days: number;
+  months: number;
+  years: number;
+}
+
+const ELAPSED_DATE_EMPTY: ElapsedDate = {
+  days: 0,
+  months: 0,
+  years: 0
+};
+
+function createElapsedTime(
   value: Miliseconds,
   single: string,
   charPlural = 's',
   plural?: string
-): ElapsedTime => {
+): ElapsedTime {
   plural = plural || `${single}${charPlural}`;
 
   const label = `${single}(${charPlural})`;
@@ -114,7 +126,7 @@ const createElapsedTime = (
     single,
     plural
   };
-};
+}
 
 const ELAPSED_TIMES: ElapsedTime[] = [
   createElapsedTime(Miliseconds.Year, 'año'),
@@ -163,6 +175,46 @@ export function dateFormatForHumans(milliseconds: number): string {
   }
 
   return format;
+}
+
+export function calculateElapsed(
+  dateStart: Undefined<Date>,
+  dateEnd: Undefined<Date>
+): ElapsedDate {
+  if (!dateStart || !dateEnd || dateStart > dateEnd) {
+    return ELAPSED_DATE_EMPTY;
+  }
+
+  let years = dateEnd.getFullYear() - dateStart.getFullYear();
+  let months = dateEnd.getMonth() - dateStart.getMonth();
+  let days = dateEnd.getDate() - dateStart.getDate();
+
+  if (days < 0) {
+    months -= 1;
+
+    const datePreviousMonth = new Date(
+      dateEnd.getFullYear(),
+      dateEnd.getMonth(),
+      0
+    );
+
+    days += datePreviousMonth.getDate();
+  }
+
+  if (months < 0) {
+    years -= 1;
+    months += 12;
+  }
+
+  if (years < 0) {
+    return ELAPSED_DATE_EMPTY;
+  }
+
+  return { days, months, years };
+}
+
+export function calculateAge(birthDate: Undefined<Date>): ElapsedDate {
+  return calculateElapsed(birthDate, new Date());
 }
 
 export function getPendingTime(
