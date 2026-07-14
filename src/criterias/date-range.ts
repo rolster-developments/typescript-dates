@@ -1,4 +1,5 @@
 import { Criteria, CriteriaCallback } from '@rolster/commons';
+
 import { DateRange } from '../values/date-range';
 
 export class DateRangeCriteria extends Criteria<DateRange> {

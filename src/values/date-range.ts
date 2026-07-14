@@ -4,7 +4,7 @@ import {
   dateIsBetween,
   dateIsEquals,
   getTimeDifference,
-  normalizeMinTime,
+  normalizeMinTime
 } from '../lib';
 
 export class DateRange {

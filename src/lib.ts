@@ -82,20 +82,20 @@ const formatters: DateFormat = {
 };
 
 interface ElapsedTime {
-  value: number;
   label: string;
-  single: string;
   plural: string;
+  single: string;
+  value: number;
 }
 
 interface PendingTime {
-  years: number;
-  months: number;
-  weeks: number;
   days: number;
   hours: number;
   minutes: number;
+  months: number;
   seconds: number;
+  weeks: number;
+  years: number;
 }
 
 export interface ElapsedDate {
