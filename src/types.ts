@@ -33,6 +33,8 @@ export enum Month {
   December
 }
 
+/* Days per month legitimately repeat */
+/* eslint-disable @typescript-eslint/no-duplicate-enum-values */
 export enum MonthDay {
   January = 31,
   February = 28,

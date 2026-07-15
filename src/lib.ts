@@ -368,9 +368,17 @@ interface CreateDate {
 export function createDate({ day, month, year }: CreateDate): Date {
   const newDate = new Date();
 
-  year && verifyDayInYear(newDate, year);
-  month && verifyDayInMonth(newDate, month);
-  day && newDate.setDate(day);
+  if (year) {
+    verifyDayInYear(newDate, year);
+  }
+
+  if (month !== undefined) {
+    verifyDayInMonth(newDate, month);
+  }
+
+  if (day) {
+    newDate.setDate(day);
+  }
 
   return newDate;
 }
