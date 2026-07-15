@@ -1,5 +1,4 @@
 import { Criteria, CriteriaCallback } from '@rolster/commons';
-
 import { Time } from '../values/time';
 
 export class TimeCriteria extends Criteria<Time> {
